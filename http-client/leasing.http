@@ -1,0 +1,15 @@
+### Create leasing (leasingUrl)
+POST localhost:8084/leasings/
+Content-Type: application/json
+
+{
+  "housingId": 1,
+  "personId": 1,
+  "assignDate": "2018-01-01",
+  "months": 5
+}
+
+### Get leasings (leasingUrl)
+GET localhost:8084/leasings?personId=1
+
+###

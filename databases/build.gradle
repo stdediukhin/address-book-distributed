@@ -1,0 +1,7 @@
+import com.epam.addressbook.gradlebuild.CfMigrationPlugin
+import com.epam.addressbook.gradlebuild.LocalMigrationPlugin
+
+subprojects {
+    apply plugin: LocalMigrationPlugin
+    apply plugin: CfMigrationPlugin
+}

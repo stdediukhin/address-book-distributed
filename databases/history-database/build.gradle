@@ -1,0 +1,6 @@
+databases {
+    devDatabase = "address_book_history_dev"
+    testDatabase = "address_book_history_test"
+    cfDatabase = "address-book-history-database"
+    cfApp = "address-book-history"
+}

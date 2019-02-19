@@ -1,0 +1,11 @@
+applications:
+  - name: address-book-history
+    path: ./applications/history-server/build/libs/history-server.jar
+    routes:
+      - route: history-address-book-[UNIQUE_SUFFIX].[CF_DOMAIN]
+    memory: 1G
+    instances: 1
+    env:
+      REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN
+    services:
+      - address-book-history-database

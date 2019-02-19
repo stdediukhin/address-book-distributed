@@ -1,0 +1,92 @@
+dist: trusty
+sudo: required
+notifications:
+  email: false
+env:
+  - RELEASE_TAG="release-$TRAVIS_BUILD_NUMBER"
+stages:
+  - build and publish
+  - deploy
+  - migrate
+if: tag IS blank
+
+jobs:
+  include:
+    - stage: build and publish
+      language: java
+      jdk: oraclejdk8
+      addons:
+        mariadb: '10.2'
+      install: skip
+      before_script:
+        - mysql -uroot < databases/create_databases.sql
+        - ./gradlew testMigrate
+      script: ./gradlew clean build
+      before_deploy:
+        - git config --local user.name "Travis CI"
+        - git config --local user.email "travis@example.com"
+        - git tag -f $RELEASE_TAG
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        file:
+          - "applications/accommodation-server/build/libs/accommodation-server.jar"
+          - "applications/history-server/build/libs/history-server.jar"
+          - "applications/registration-server/build/libs/registration-server.jar"
+          - "applications/leasing-server/build/libs/leasing-server.jar"
+        skip_cleanup: true
+    - stage: deploy
+      language: java
+      script:
+        - echo "Downloading accommodation server $RELEASE_TAG"
+        - wget -P applications/accommodation-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/accommodation-server.jar
+      before_deploy:
+        - cp manifest-accommodation.yml manifest.yml
+        - echo "Deploying accommodation server $RELEASE_TAG"
+      deploy: &cloudfoundry
+        provider: cloudfoundry
+        api: $CF_API_URL
+        username: $CF_USERNAME
+        password: $CF_PASSWORD
+        organization: $CF_ORG
+        space: review
+    - stage: deploy
+      language: bash
+      script:
+        - echo "Downloading history server $RELEASE_TAG"
+        - wget -P applications/history-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/history-server.jar
+      before_deploy:
+        - cp manifest-history.yml manifest.yml
+        - echo "Deploying history server $RELEASE_TAG"
+      deploy:
+        <<: *cloudfoundry
+    - stage: deploy
+      language: bash
+      script:
+        - echo "Downloading registration server $RELEASE_TAG"
+        - wget -P applications/registration-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/registration-server.jar
+      before_deploy:
+        - cp manifest-registration.yml manifest.yml
+        - echo "Deploying registration server $RELEASE_TAG"
+      deploy:
+        <<: *cloudfoundry
+    - stage: deploy
+      language: bash
+      script:
+        - echo "Downloading leasing server $RELEASE_TAG"
+        - wget -P applications/leasing-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/leasing-server.jar
+      before_deploy:
+        - cp manifest-leasing.yml manifest.yml
+        - echo "Deploying leasing server $RELEASE_TAG"
+      deploy:
+        <<: *cloudfoundry
+    - stage: migrate
+      language: java
+      before_install:
+        - wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        - echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        - sudo apt-get update
+        - sudo apt-get install cf-cli
+      script:
+        - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s review
+        - ./gradlew cfMigrate

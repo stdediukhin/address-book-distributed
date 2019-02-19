@@ -1,0 +1,9 @@
+applications:
+  - name: address-book-registration
+    path: ./applications/registration-server/build/libs/registration-server.jar
+    routes:
+      - route: registration-address-book-[UNIQUE_SUFFIX].[CF_DOMAIN]
+    memory: 1G
+    instances: 1
+    services:
+      - address-book-registration-database

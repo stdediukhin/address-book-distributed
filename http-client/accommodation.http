@@ -1,0 +1,16 @@
+### Create accommodation (accommodationUrl)
+POST localhost:8081/accommodations
+Content-Type: application/json
+
+{
+  "housingId": 1,
+  "personId": 1,
+  "singleOwned": true,
+  "startDate": "2018-01-01",
+  "endDate": "2018-10-01"
+}
+
+### Get accommodations (accommodationUrl)
+GET localhost:8081/accommodations?housingId=1
+
+###

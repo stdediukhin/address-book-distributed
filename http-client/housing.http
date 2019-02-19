@@ -1,0 +1,19 @@
+### Create project (registrationUrl)
+POST localhost:8083/housings
+Content-Type: application/json
+
+{
+  "accountId": 1,
+  "name": "Housing #1",
+  "addressLine1": "#1 al",
+  "addressLine2": "#1 un",
+  "city": "#1 city",
+  "state": "CA",
+  "zip5": "12345",
+  "active": true
+}
+
+### Get housings
+GET localhost:8083/housings?accountId=1
+
+###

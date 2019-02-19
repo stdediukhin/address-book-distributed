@@ -1,0 +1,12 @@
+apply plugin: "org.springframework.boot"
+
+dependencies {
+    compile project(":components:rest-support")
+
+    compile "org.springframework.boot:spring-boot-starter-web"
+
+    compile "com.zaxxer:HikariCP:$hikariCPVersion"
+    compile "mysql:mysql-connector-java:$mysqlConnectorJavaVersion"
+
+    testCompile project(":components:test-support")
+}

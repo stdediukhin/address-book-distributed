@@ -1,0 +1,11 @@
+applications:
+  - name: address-book-leasing
+    path: ./applications/leasing-server/build/libs/leasing-server.jar
+    routes:
+      - route: leasing-address-book-[UNIQUE_SUFFIX].[CF_DOMAIN]
+    memory: 1G
+    instances: 1
+    env:
+      REGISTRATION_SERVER_ENDPOINT: http://FILL_ME_IN
+    services:
+      - address-book-leasing-database

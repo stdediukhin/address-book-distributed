@@ -1,0 +1,6 @@
+databases {
+    devDatabase = "address_book_leasing_dev"
+    testDatabase = "address_book_leasing_test"
+    cfDatabase = "address-book-leasing-database"
+    cfApp = "address-book-leasing"
+}

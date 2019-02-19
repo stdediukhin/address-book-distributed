@@ -1,0 +1,23 @@
+rootProject.name = "address-book-distributed"
+
+include "applications:accommodation-server"
+include "applications:history-server"
+include "applications:registration-server"
+include "applications:leasing-server"
+
+include "components:account"
+include "components:accommodation"
+include "components:history"
+include "components:housing"
+include "components:leasing"
+include "components:person"
+
+include "components:rest-support" 
+include "components:test-support"
+
+include "databases:accommodation-database"
+include "databases:history-database"
+include "databases:registration-database"
+include "databases:leasing-database"
+
+include "integration-test"

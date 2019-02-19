@@ -1,0 +1,4 @@
+### Get account (registrationUrl)
+GET localhost:8083/accounts?personId=1
+
+###

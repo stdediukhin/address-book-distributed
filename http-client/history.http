@@ -1,0 +1,14 @@
+### Create history (historyUrl)
+POST localhost:8082/histories
+Content-Type: application/json
+
+{
+  "housingId": 1,
+  "name": "Housing #1",
+  "description": ""
+}
+
+### Get histories (historyUrl)
+GET localhost:8082/histories?housingId=1
+
+###
