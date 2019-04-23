@@ -3,7 +3,7 @@ applications:
     path: ./applications/registration-server/build/libs/registration-server.jar
     routes:
       - route: registration-address-book-stepan.cfapps.io
-    memory: 1G
+    memory: 512M
     instances: 1
     services:
       - address-book-registration-database

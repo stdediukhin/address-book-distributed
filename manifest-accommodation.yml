@@ -3,7 +3,7 @@ applications:
     path: ./applications/accommodation-server/build/libs/accommodation-server.jar
     routes:
       - route: accommodation-address-book-stepan.cfapps.io
-    memory: 1G
+    memory: 512M
     instances: 1
     env:
       REGISTRATION_SERVER_ENDPOINT: http://registration-address-book-stepan.cfapps.io

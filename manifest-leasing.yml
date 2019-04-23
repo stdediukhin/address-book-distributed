@@ -3,7 +3,7 @@ applications:
     path: ./applications/leasing-server/build/libs/leasing-server.jar
     routes:
       - route: leasing-address-book-stepan.cfapps.io
-    memory: 1G
+    memory: 512M
     instances: 1
     env:
       REGISTRATION_SERVER_ENDPOINT: http://registration-address-book-stepan.cfapps.io
