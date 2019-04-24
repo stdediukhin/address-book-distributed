@@ -3,11 +3,8 @@ applications:
     path: ./applications/leasing-server/build/libs/leasing-server.jar
     routes:
       - route: leasing-address-book-stepan.cfapps.io
-    memory: 512M
+    memory: 682M
     instances: 1
-    env:
-      JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: {stack_threads: 100, memory_sizes: {stack: 512k, native: 150m}}]'
-      REGISTRATION_SERVER_ENDPOINT: http://registration-address-book-stepan.cfapps.io
     services:
       - address-book-leasing-database
       - address-book-service-registry

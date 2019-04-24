@@ -50,16 +50,16 @@ jobs:
         password: $CF_PASSWORD
         organization: $CF_ORG
         space: review
-    - stage: deploy
-      language: bash
-      script:
-        - echo "Downloading history server $RELEASE_TAG"
-        - wget -P applications/history-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/history-server.jar
-      before_deploy:
-        - cp manifest-history.yml manifest.yml
-        - echo "Deploying history server $RELEASE_TAG"
-      deploy:
-        <<: *cloudfoundry
+#    - stage: deploy
+#      language: bash
+#      script:
+#        - echo "Downloading history server $RELEASE_TAG"
+#        - wget -P applications/history-server/build/libs https://github.com/$GITHUB_USERNAME/address-book-distributed/releases/download/$RELEASE_TAG/history-server.jar
+#      before_deploy:
+#        - cp manifest-history.yml manifest.yml
+#        - echo "Deploying history server $RELEASE_TAG"
+#      deploy:
+#        <<: *cloudfoundry
     - stage: deploy
       language: bash
       script:
