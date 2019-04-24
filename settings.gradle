@@ -20,4 +20,6 @@ include "databases:history-database"
 include "databases:registration-database"
 include "databases:leasing-database"
 
+include "platform:eureka-server"
+
 include "integration-test"

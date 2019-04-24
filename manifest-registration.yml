@@ -9,3 +9,4 @@ applications:
       JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: {stack_threads: 100, memory_sizes: {stack: 512k, native: 150m}}]'
     services:
       - address-book-registration-database
+      - address-book-service-registry

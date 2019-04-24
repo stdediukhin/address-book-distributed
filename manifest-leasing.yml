@@ -10,3 +10,4 @@ applications:
       REGISTRATION_SERVER_ENDPOINT: http://registration-address-book-stepan.cfapps.io
     services:
       - address-book-leasing-database
+      - address-book-service-registry

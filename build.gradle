@@ -13,6 +13,9 @@ buildscript {
         okhttp3Version = "3.8.0"
         jsonPathVersion = "2.2.0"
         hikariCPVersion = "3.3.0"
+        springCloudVersion = "Finchley.RELEASE"
+        springCloudServicesClientLibrariesVersion = "2.0.3.RELEASE"
+//        springCloudCommonsVersion = SPRING_CLOUD_COMMONS_VERSION
     }
 
     repositories {
